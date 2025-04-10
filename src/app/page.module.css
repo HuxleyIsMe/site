@@ -2,6 +2,11 @@
   min-height: 100vh;
 }
 
+.wrapper {
+  position: relative;
+  margin-top: 12px;
+}
+
 .container {
   position: relative;
   height: 500px;
@@ -13,74 +18,33 @@
   rotate: 200deg;
 }
 
-.sides > p {
-  border-top: 1pt solid black;
-}
-
-.content {
-  position: relative;
-  width: 80%;
-  padding-top: 80px;
-  z-index: 5;
-
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.controls {
-  border: 2pt solid cyan;
-}
-
-.controls > div {
-  display: flex;
-  margin: 8 12px;
-  width: 300px;
-  justify-content: space-between;
-}
-
-.content > div {
-  border-radius: 4px;
-
-  padding-left: 12px;
-
-  margin-bottom: 16px;
-  margin-top: 16px;
-  padding: 8px;
-  max-width: 300px;
-  margin-right: 12px;
-
-  opacity: 0.9;
-}
 .banner {
   font-family: Arial, Helvetica, sans-serif;
-
   position: absolute;
-  top: 35%;
-
-  font-size: 3em;
+  top: 50%;
+  font-size: 2em;
   font-weight: 800;
   width: 100%;
   text-align: center;
   left: 0;
-
   letter-spacing: 8px;
   color: rgb(227, 14, 206);
   mix-blend-mode: difference;
-  line-height: 200px;
   z-index: 6;
 }
 
 .tagline {
-  top: 40%;
   font-size: 1em;
 }
 
-.update {
-  background: white;
-  border-radius: 4px;
-  color: black;
-  height: 300px;
+@media only screen and (max-width: 500px) {
+  .container {
+    clip-path: none;
+    top: 10px;
+    height: 100%;
+  }
+
+  .banner {
+    top: 40%;
+  }
 }

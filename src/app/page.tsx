@@ -6,18 +6,15 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className={styles.flex}>
-          <section>
-            <div className={styles.container}>
-              <Canvas isPlaying={true} />
-            </div>
-            <h2 className={styles.banner}>hi im huxley</h2>
-            <h2 className={`${styles.banner} ${styles.tagline}`}>
-              I make web things
-            </h2>
-            <section className={styles.sides}></section>
-          </section>
-        </div>
+        <section className={styles.wrapper}>
+          <div className={styles.container}>
+            <Canvas isPlaying={true} />
+          </div>
+          <div className={styles.banner}>
+            <h2>hi im huxley</h2>
+            <h3 className={`${styles.tagline}`}>I make web things</h3>
+          </div>
+        </section>
       </main>
     </div>
   );
