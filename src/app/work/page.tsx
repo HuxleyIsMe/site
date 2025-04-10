@@ -3,12 +3,12 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main>
+      <div className={styles.container}>
         <h1 className={styles.pop}>WORK</h1>
-        <h2>
+        <p>
           This site is currently in progress, I will add things as I make them.
-        </h2>
-      </main>
+        </p>
+      </div>
     </div>
   );
 }

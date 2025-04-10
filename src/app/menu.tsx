@@ -11,8 +11,17 @@ export const Menu = React.memo(() => {
 
   const { width } = useWindowSize();
 
+  const [mobileTarget, setMobileTarget] = React.useState<HTMLElement | null>(
+    null
+  );
+
+  React.useEffect(() => {
+    let targetForMobileMenu = document.getElementById("mobileMenu");
+    setMobileTarget(targetForMobileMenu);
+  }, []);
+
   const menuComponentToUse = React.useMemo(() => {
-    if (width < 600) {
+    if (width < 600 && mobileTarget) {
       return createPortal(
         <div className={styles.wrapper}>
           <button
@@ -42,7 +51,7 @@ export const Menu = React.memo(() => {
             </ul>
           )}
         </div>,
-        document?.body
+        mobileTarget
       );
     } else {
       return (
@@ -66,7 +75,7 @@ export const Menu = React.memo(() => {
         </div>
       );
     }
-  }, [width]);
+  }, [width, toggleMenu]);
 
   return <>{menuComponentToUse}</>;
 });

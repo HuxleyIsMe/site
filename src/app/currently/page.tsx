@@ -3,9 +3,9 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main>
-        <span className={styles.pop}>CURRENTLY</span>
+      <div>
         <div className={styles.container}>
+          <h1 className={styles.pop}>CURRENTLY</h1>
           <p>
             After a challenging personal period caring for a loved one, I
             realized I jumped back into interviews before I was fully ready.
@@ -18,7 +18,7 @@ export default function Home() {
             </span>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -26,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <menu id="mobileMenu"></menu>
         <div className="wrapper">
           <Menu />
           <div className="content">{children}</div>

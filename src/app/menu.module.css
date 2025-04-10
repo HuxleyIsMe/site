@@ -11,7 +11,7 @@
 .wrapper {
   position: sticky;
   height: 52px;
-  width: 90%;
+  width: 100%;
   text-align: center;
   font-family: "Courier New", Courier, monospace;
   color: black;
@@ -35,8 +35,8 @@
 
   & li:hover {
     transition: color;
-    margin-bottom: -4px;
-    border-bottom: 12pt solid black;
+    margin-bottom: -2px;
+    border-bottom: 8pt solid black;
   }
 }
 

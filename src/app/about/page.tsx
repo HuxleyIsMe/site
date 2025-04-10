@@ -16,17 +16,16 @@ export default function Home() {
                 width={300}
                 height={400}
               />
-              <span>
-                Javascript, TypeScript, React, HTML & CSS, Node.js, GQL, AWS,
-                TDD
-              </span>
-              <span>
-                I have experience leading projects and introducing team
-                processes
-              </span>
+              <div>
+                <p>
+                  Javascript, TypeScript, React, HTML & CSS, Node.js, GQL, AWS,
+                  TDD. I have experience leading projects and introducing team
+                  processes
+                </p>
+              </div>
             </div>
           </div>
-          <span className={styles.right}>
+          <span className={styles.graphic}>
             <div role="presentation" aria-hidden="true">
               REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
               CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -

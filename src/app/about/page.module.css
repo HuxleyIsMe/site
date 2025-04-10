@@ -18,24 +18,19 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: rgb(255, 192, 192);
 }
-
-.paragraph {
-  width: 300px;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .row {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: space-around;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: rgb(255, 192, 192);
 }
-.right {
+.graphic {
   position: relative;
   width: 700px;
-  height: 85vh;
+  margin: 20px 8px;
+  height: 72vh;
 
   overflow: hidden;
   text-overflow: clip;
@@ -43,8 +38,17 @@
 .overlay {
   position: absolute;
   font-size: 3em;
-  margin: 0 auto;
+  margin-left: 8px;
   top: 0%;
-
   mix-blend-mode: difference;
+}
+
+.container {
+  max-width: 300px;
+  margin: 12px 0px;
+}
+
+.container > div {
+  margin: 12px 0px;
+  font-weight: 200;
 }
