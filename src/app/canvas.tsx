@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 
-export const Canvas = ({ isPlaying }) => {
+export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -12,7 +12,11 @@ export const Canvas = ({ isPlaying }) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animation = undefined;
+    // We need to have a higher scop reference to animation
+    // this value will take the animation ID and use it in the clean up to
+    // remove the animation from the stack. We cant reference it in the useffect
+    // because it would get reset
+    let animation = undefined as unknown as number;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight * 0.7;

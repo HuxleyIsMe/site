@@ -27,8 +27,4 @@
     margin-bottom: -4px;
     border-bottom: 12pt solid black;
   }
-
-  Link:active {
-    border-bottom: 8pt solid black;
-  }
 }
