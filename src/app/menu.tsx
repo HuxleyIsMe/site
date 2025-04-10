@@ -6,7 +6,7 @@ import { useWindowSize } from "./useWindowSize.ts";
 import Link from "next/link";
 import styles from "./menu.module.css";
 
-export const Menu = () => {
+export const Menu = React.memo(() => {
   const [toggleMenu, setToggleMenu] = React.useState(true);
 
   const { width } = useWindowSize();
@@ -69,4 +69,4 @@ export const Menu = () => {
   }, [width]);
 
   return <>{menuComponentToUse}</>;
-};
+});
