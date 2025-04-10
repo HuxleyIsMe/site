@@ -124,7 +124,11 @@ export default function Home() {
               GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
               JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB
             </div>
-            <span className={styles.overlay} role="contentinfo">
+            <span
+              className={styles.overlay}
+              role="contentinfo"
+              aria-hidden="false"
+            >
               I have 5 years of experience in software development, working as a
               full-stack, front-end, and back-end engineer across startups,
               scale-ups, and large companies, building SaaS and product
