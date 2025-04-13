@@ -1,0 +1,55 @@
+.spotifyPlayerWrapper {
+  position: fixed;
+  right: 0;
+  z-index: 10;
+}
+
+.spotifyPlayer {
+  width: fit-content;
+  height: fit-content;
+  min-height: 100vh;
+  z-index: 12;
+  padding: 4px;
+  background: rgba(156, 0, 61, 255);
+  position: absolute;
+  padding-left: 12px;
+  right: 0px;
+}
+
+.spotifyPlayerTab {
+  text-align: center;
+  height: 60px;
+  position: absolute;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  top: calc(50% - 30px);
+  left: -40px;
+  width: 40px;
+  background: rgba(156, 0, 61, 255);
+  border-radius: 4px 0px 0px 4px;
+}
+
+.spotifyLogo {
+  background: rgba(156, 0, 61, 255);
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  padding-left: 8px;
+  width: 40px;
+}
+
+.invert {
+  filter: invert(50);
+}
+
+@keyframes fadeOut {
+  0% {
+    width: fit-content;
+  }
+  100% {
+    width: 0px;
+    display: none;
+  }
+}

@@ -1,15 +1,18 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
+
     if (!ctx) return;
 
     // We need to have a higher scop reference to animation
@@ -25,14 +28,12 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
     const amplitude = 130;
     const speed = 0.02;
     let time = 0;
+    const spacing = canvas.width / totalCircles;
 
     function animate() {
       if (!ctx || !canvas) return;
 
-      const spacing = canvas.width / totalCircles;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.save();
 
       for (let i = 0; i < totalCircles; i++) {
         const hue = i * (360 / totalCircles);
@@ -48,21 +49,59 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
         ctx.fill();
       }
 
-      ctx.restore();
-
       time += speed;
 
-      if (isPlaying) {
+      if (!mediaRecorder) {
         animation = requestAnimationFrame(animate);
       }
     }
+
+    console.log(performance.now());
 
     animate();
 
     return () => {
       cancelAnimationFrame(animation);
     };
-  }, [isPlaying]);
+  }, [mediaRecorder]);
 
-  return <canvas ref={canvasRef} style={{ display: "block" }} />;
+  useEffect(() => {
+    const canvas = document.querySelector("canvas");
+    if (!canvas) return;
+    const chunks = [];
+    const options = { mimeType: "video/webm; codecs=vp9" };
+
+    const stream = canvas.captureStream(25); // 25 FPS
+
+    const mediaRecorder = new MediaRecorder(stream, options);
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) chunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(chunks, { type: "video/webm" });
+      const url = URL.createObjectURL(blob);
+      const video = videoRef.current;
+      video.src = url;
+      video.play();
+    };
+
+    mediaRecorder.start();
+
+    setTimeout(() => {
+      mediaRecorder.stop();
+      setMediaRecorder(mediaRecorder);
+    }, 14800);
+  }, []);
+
+  return (
+    <>
+      <canvas
+        ref={canvasRef}
+        style={{ display: mediaRecorder ? "none" : "block" }}
+      />
+      <video ref={videoRef} autoPlay loop muted />
+    </>
+  );
 };

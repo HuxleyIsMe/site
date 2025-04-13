@@ -15,7 +15,11 @@
   filter: hue-rotate(280deg) blur(50px);
   margin: 16px;
   display: flex;
-  rotate: 200deg;
+  cursor: grab;
+}
+
+.container:active {
+  cursor: grabbing;
 }
 
 .banner {

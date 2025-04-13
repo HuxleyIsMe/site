@@ -1,5 +1,4 @@
 .menuButton {
-  position: sticky;
   display: none;
   font-family: "Courier New", Courier, monospace;
   color: black;
@@ -11,7 +10,7 @@
 .wrapper {
   position: sticky;
   height: 52px;
-  width: 100%;
+  width: calc(100% - 300px);
   text-align: center;
   font-family: "Courier New", Courier, monospace;
   color: black;
@@ -40,9 +39,10 @@
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
   .wrapper {
     height: fit-content;
+    width: 100%;
   }
   .menuButton {
     display: block;
@@ -60,10 +60,8 @@
     top: 40px;
     left: 15%;
     opacity: 1;
-
     filter: none;
     background: none;
-
     flex-direction: column;
     font-size: 16px;
     z-index: 7;

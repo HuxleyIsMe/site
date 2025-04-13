@@ -85,46 +85,8 @@ export default function Home() {
               JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
               REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
               CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-              AGILE - JIRA - SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT -
-              JAVASCRIPT - AWS - GQL - TDD - NODE - HTML - CSS - STORYBOOK -
-              GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL - AGILE - JIRA -
-              SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT - JAVASCRIPT - AWS -
-              GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
-              JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
-              REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
-              CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-              AGILE - JIRA - SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT -
-              JAVASCRIPT - AWS - GQL - TDD - NODE - HTML - CSS - STORYBOOK -
-              GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL - AGILE - JIRA -
-              SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT - JAVASCRIPT - AWS -
-              GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
-              JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
-              REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
-              CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-              AGILE - JIRA - SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT -
-              JAVASCRIPT - AWS - GQL - TDD - NODE - HTML - CSS - STORYBOOK -
-              GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL - AGILE - JIRA -
-              SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT - JAVASCRIPT - AWS -
-              GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
-              JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
-              REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
-              CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-              AGILE - JIRA - SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT -
-              JAVASCRIPT - AWS - GQL - TDD - NODE - HTML - CSS - STORYBOOK -
-              GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL - AGILE - JIRA -
-              SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT - JAVASCRIPT - AWS -
-              GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
-              JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
-              REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
-              CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-              AGILE - JIRA - SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT -
-              JAVASCRIPT - AWS - GQL - TDD - NODE - HTML - CSS - STORYBOOK -
-              GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL - AGILE - JIRA -
-              SPLUNK - GIT - GIT HUB - REACT - TYPESCRIPT - JAVASCRIPT - AWS -
-              GQL - TDD - NODE - HTML - CSS - STORYBOOK - GRAFANA - CIRCLE CI -
-              JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB
             </div>
-            <span
+            <p
               className={styles.overlay}
               role="contentinfo"
               aria-hidden="false"
@@ -135,7 +97,7 @@ export default function Home() {
               offerings and gaining insight into the strengths and challenges of
               each environment. I have a growth mindset and am confident in my
               ability to work it out.
-            </span>
+            </p>
           </span>
         </div>
       </main>
