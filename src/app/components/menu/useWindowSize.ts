@@ -11,8 +11,7 @@ export const useWindowSize = () => {
       });
     };
 
-    // Only run on client
-    handleResize(); // Set initial size
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
