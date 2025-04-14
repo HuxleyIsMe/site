@@ -7,8 +7,6 @@ import { Canvas } from "./canvas";
 export default function Home() {
   const [currentRotation, setCurrentRotation] = useState(200);
 
-  console.log({ currentRotation });
-
   const currentMouse = useRef({ x: 0, y: 0 });
   const startMouse = useRef({ x: 0, y: 0 });
 
@@ -23,21 +21,22 @@ export default function Home() {
 
   const plotStart = () => {
     startMouse.current = currentMouse.current;
-    console.log("start", startMouse.current);
   };
 
   const rotateComp = () => {
     let endMouseCoords = currentMouse.current;
-    console.log("end", endMouseCoords);
 
     let start = Math.atan2(startMouse.current.y, startMouse.current.x);
 
-    let end = Math.atan2(endMouseCoords.y, endMouseCoords.y);
+    let end = Math.atan2(endMouseCoords.y, endMouseCoords.x);
 
     let difference = end - start;
 
-    console.log(difference);
-    setCurrentRotation((prev) => prev - 50);
+    let p = difference / Math.PI;
+
+    let a = p * 180;
+
+    setCurrentRotation((prev) => prev + a);
   };
 
   return (
