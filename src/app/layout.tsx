@@ -25,13 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} wrapper2`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <main className="page">
           <menu id="mobileMenu"></menu>
           <SpotifyBar />
           <div className="wrapper">
             <Menu />
-            {children}
+            <div className="content">{children}</div>
           </div>
         </main>
       </body>

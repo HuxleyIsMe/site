@@ -7,7 +7,7 @@ export default function Home() {
       <main>
         <div className={styles.row}>
           <div>
-            <h1 className={styles.pop}>ABOUT</h1>
+            <h1>ABOUT</h1>
 
             <div className={styles.container}>
               <Image

@@ -1,34 +1,19 @@
-.page {
-  min-height: 100vh;
-}
-
 .wrapper {
   position: relative;
-  margin-top: 12px;
 }
 
 .container {
-  position: relative;
   height: 500px;
-  top: 100px;
+  margin-top: 150px;
   clip-path: circle(50%);
   filter: hue-rotate(280deg) blur(50px);
-  margin: 16px;
   display: flex;
-  cursor: grab;
   rotate: 200deg;
 }
 
-.container:active {
-  cursor: grabbing;
-}
-
 .banner {
-  font-family: Arial, Helvetica, sans-serif;
   position: absolute;
   top: 50%;
-  font-size: 2em;
-  font-weight: 800;
   width: 100%;
   text-align: center;
   left: 0;
@@ -36,10 +21,17 @@
   color: rgb(227, 14, 206);
   mix-blend-mode: difference;
   z-index: 6;
-}
 
-.tagline {
-  font-size: 1em;
+  h1 {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 2.5em;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -51,9 +43,5 @@
 
   .banner {
     top: 40%;
-  }
-
-  #mobileMenu {
-    display: block;
   }
 }

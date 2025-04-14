@@ -29,6 +29,14 @@ h3,
 h4 {
   font-family: "Courier New", Courier, monospace;
 }
+
+h1 {
+  font-size: 6.5em;
+  letter-spacing: 10px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(255, 192, 192);
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -64,11 +72,22 @@ a {
   min-height: 100vh;
   overflow: scroll;
 }
+.content {
+  height: 100%;
+  margin-top: 16px;
+}
 
 @media (min-width: 1000px) {
   .wrapper {
     margin: 0 auto;
     width: 1300px;
     overflow: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .h1 {
+    font-size: 1em;
+    text-overflow: ellipsis;
   }
 }

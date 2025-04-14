@@ -4,7 +4,7 @@ import { Canvas } from "./components/index";
 export default function Home() {
   return (
     <>
-      <section>
+      <section className={styles.wrapper}>
         <div className={styles.container}>
           <Canvas />
         </div>
