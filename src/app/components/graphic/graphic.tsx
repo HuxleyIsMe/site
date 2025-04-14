@@ -1,144 +1,91 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
+import { Canvas } from "./components/canvas";
 
+/**
+ *
+ * This component has been made to improve performance of the animation for users
+ * by swapping to a video play back of the animation instead of continuing to redraw
+ * I was able to see a 30-40% reduction in my intel CPU.
+ *
+ * Essentially what we are doing is:
+ *
+ * 1) settting up by having both a video and a canvas element
+ * 2) Then creating a recorder that will record the canvas and play the video
+ * 3) getting the canvas to begin animation  that we record
+ * 4) Once the canvas has animated a rough loop we tell the recorder we are done
+ * 5) we hide the canvas and tell it not to play anymore
+ * 6) we make the video play back the saved recording
+ */
 export const Graphic: React.FC = () => {
-  const [isFinishedAnimation, setIsFinishedAnimation] = useState(false);
-  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
-    null
-  );
+  const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const recorderRef = useRef<MediaRecorder>(null);
+  const [animationHasCycled, setAnimationHasCycled] = useState(false);
 
   useEffect(() => {
-    const canvas = document.querySelector("canvas");
-    if (!canvas) return;
-
-    // @ts-ignore
-    const chunks = [];
-    const options = { mimeType: "video/webm; codecs=vp9" };
-
-    const stream = canvas.captureStream(20); // 25 FPS
-
-    const mediaRecorder = new MediaRecorder(stream, options);
-
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data.size > 0) chunks.push(e.data);
-    };
-
-    mediaRecorder.onstop = () => {
-      // @ts-ignore
-      const blob = new Blob(chunks, { type: "video/webm" });
-      const url = URL.createObjectURL(blob);
-
-      const video = videoRef.current;
-
-      if (video) {
-        video.src = url;
-        video.play();
-      }
-    };
-
-    mediaRecorder.start();
-
-    setMediaRecorder(mediaRecorder);
+    if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
+      setIsReadyToAnimate(true);
+    }
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (canvasRef.current && videoRef.current !== null) {
+      const stream = canvasRef.current.captureStream(20);
 
-    const ctx = canvas.getContext("2d");
+      const options = { mimeType: "video/webm; codecs=vp9" };
+      const mediaRecorder = new MediaRecorder(stream, options);
 
-    if (!ctx) return;
+      const chunks: BlobPart[] = [];
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) chunks.push(e.data);
+      };
 
-    // We need to have a higher scop reference to animation
-    // this value will take the animation ID and use it in the clean up to
-    // remove the animation from the stack. We cant reference it in the useffect
-    // because it would get reset
-    let animation = undefined as unknown as number;
+      let video = videoRef.current;
 
-    canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * window.devicePixelRatio * 0.7;
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks, { type: "video/webm" });
+        const url = URL.createObjectURL(blob);
+        video.src = url;
+        video.play();
+      };
 
-    const totalCircles = 100;
-    const amplitude = 130;
-    const speed = 0.03;
-    let time = 0;
-    const spacing = canvas.width / totalCircles;
+      mediaRecorder.start();
 
-    const ourCircles = () => {
-      let circles = [];
-
-      for (let i = 0; i < totalCircles; i++) {
-        const x = i * spacing;
-        const y =
-          i * (canvas.height / totalCircles) + Math.sin(i * 0.3) * amplitude;
-
-        circles.push(() => ctx.arc(x, y, 200, 0, Math.PI * 2));
-      }
-
-      return circles;
-    };
-
-    let circles = ourCircles();
-
-    let repeated = {};
-
-    function animate() {
-      if (!ctx || !canvas) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      circles.forEach((c, i) => {
-        const hue = i * (360 / totalCircles);
-        ctx.fillStyle = `hsl(${(hue + time * 50) % 360}, 100%, 50%, 0.7)`;
-
-        let key = `${((hue + time * 50) % 360).toFixed(2)}${i}`;
-
-        if (repeated[key]) {
-          console.log("i have found a repeat");
-          setIsFinishedAnimation(true);
-        } else {
-          repeated[key] = true;
-        }
-
-        ctx.beginPath();
-        c();
-        ctx.fill();
-      });
-
-      time += speed;
-
-      if (!isFinishedAnimation) {
-        animation = requestAnimationFrame(animate);
-      }
+      recorderRef.current = mediaRecorder;
     }
+  }, [isReadyToAnimate]);
 
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animation);
-    };
-  }, [isFinishedAnimation]);
-
+  /**
+   * The animations takes roughly 10s to fully play through
+   * so this warning is correct, in our case we can guarentee this is
+   * going to be here by then
+   */
   useEffect(() => {
-    if (isFinishedAnimation) {
-      mediaRecorder.stop();
+    if (animationHasCycled && recorderRef.current !== null) {
+      recorderRef.current.stop();
       console.log("should be on video");
     }
-  }, [isFinishedAnimation]);
+  }, [animationHasCycled]);
 
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        style={{ visibility: isFinishedAnimation ? "hidden" : "visible" }}
-      />
+      {!animationHasCycled && (
+        <Canvas
+          canvasRef={canvasRef}
+          handleAnimationCompleted={() => setAnimationHasCycled(true)}
+        />
+      )}
       <video
         ref={videoRef}
         role="none"
         aria-description="A video of squiqqly colored circles meandering across the screen"
-        style={{ position: "absolute", height: 100 + "%", width: 100 + "%" }}
+        style={{
+          position: "absolute",
+          height: canvasRef.current?.height,
+          width: canvasRef.current?.width,
+        }}
         autoPlay
         loop
         muted
