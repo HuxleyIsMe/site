@@ -1,12 +1,12 @@
 import styles from "./page.module.css";
-import { Canvas } from "./components/index";
+import { Graphic } from "./components/index";
 
 export default function Home() {
   return (
     <>
       <section className={styles.wrapper}>
         <div className={styles.container}>
-          <Canvas />
+          <Graphic />
         </div>
         <div className={styles.banner}>
           <h1>hi im huxley</h1>

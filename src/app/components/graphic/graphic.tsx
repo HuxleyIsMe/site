@@ -1,12 +1,13 @@
 "use client";
-
 import { useRef, useEffect, useState } from "react";
 
-export const Canvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mediaRecorder, setMediaRecorder] = useState<any>(null);
+export const Graphic: React.FC = () => {
   const [isFinishedAnimation, setIsFinishedAnimation] = useState(false);
-  const videoRef = useRef(null);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
+    null
+  );
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
@@ -30,10 +31,11 @@ export const Canvas: React.FC = () => {
       const url = URL.createObjectURL(blob);
 
       const video = videoRef.current;
-      // @ts-ignore
-      video.src = url;
-      // @ts-ignore
-      video.play();
+
+      if (video) {
+        video.src = url;
+        video.play();
+      }
     };
 
     mediaRecorder.start();
@@ -72,7 +74,7 @@ export const Canvas: React.FC = () => {
         const y =
           i * (canvas.height / totalCircles) + Math.sin(i * 0.3) * amplitude;
 
-        circles.push(() => ctx.arc(x, y, 350, 0, Math.PI * 2));
+        circles.push(() => ctx.arc(x, y, 200, 0, Math.PI * 2));
       }
 
       return circles;
