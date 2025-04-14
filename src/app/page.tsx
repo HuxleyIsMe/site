@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import styles from "./page.module.css";
-import { Canvas } from "./canvas";
+import { Canvas } from "./components/index";
 
 export default function Home() {
   const [currentRotation, setCurrentRotation] = useState(200);

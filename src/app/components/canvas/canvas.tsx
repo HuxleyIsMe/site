@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
+export const Canvas: React.FC<{ isPlaying: boolean }> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mediaRecorder, setMediaRecorder] = useState<any>(null);
   const [isFinishedAnimation, setIsFinishedAnimation] = useState(false);
@@ -11,6 +11,8 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
   useEffect(() => {
     const canvas = document.querySelector("canvas");
     if (!canvas) return;
+
+    // @ts-ignore
     const chunks = [];
     const options = { mimeType: "video/webm; codecs=vp9" };
 
@@ -23,10 +25,14 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
     };
 
     mediaRecorder.onstop = () => {
+      // @ts-ignore
       const blob = new Blob(chunks, { type: "video/webm" });
       const url = URL.createObjectURL(blob);
+
       const video = videoRef.current;
+      // @ts-ignore
       video.src = url;
+      // @ts-ignore
       video.play();
     };
 

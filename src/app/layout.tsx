@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Menu } from "./menu";
+
 import { Geist, Geist_Mono } from "next/font/google";
-import { SpotifyBar } from "./spotifyBar";
+import { SpotifyBar, Menu } from "./components/index";
 import "./globals.css";
 
 const geistSans = Geist({
