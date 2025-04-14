@@ -78,3 +78,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.page {
+  min-height: 100vh;
+}

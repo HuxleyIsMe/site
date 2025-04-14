@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpotifyBar, Menu } from "./components/index";
 import "./globals.css";
@@ -27,13 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} wrapper2`}>
-        <menu id="mobileMenu"></menu>
-        <SpotifyBar />
-        <div className="wrapper">
-          <Menu />
+        <main className="page">
+          <menu id="mobileMenu"></menu>
+          <SpotifyBar />
+          <div className="wrapper">
+            <Menu />
 
-          <div className="content">{children}</div>
-        </div>
+            <div className="content">{children}</div>
+          </div>
+        </main>
       </body>
     </html>
   );
