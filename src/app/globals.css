@@ -1,5 +1,5 @@
 :root {
-  --background: #ffffff;
+  --background: ivory;
   --foreground: #171717;
 }
 
@@ -8,28 +8,6 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-.wrapper {
-  min-height: 100vh;
-  overflow: scroll;
-}
-.content {
-  height: 100%;
-  margin-top: 16px;
-}
-
-@media (min-width: 1000px) {
-  .wrapper {
-    margin: 0 auto;
-    width: 1300px;
-
-    overflow: hidden;
-  }
-}
-
-.wrapper {
-  margin-top: 20px;
 }
 
 html,
@@ -53,10 +31,7 @@ h4 {
 }
 body {
   color: var(--foreground);
-  /* background: var(--background); */
-  /* background: #0a0a0a; */
-  background: ivory;
-
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,6 +54,21 @@ a {
   }
 }
 
+/*---------------------------------------------- my styling */
+
 .page {
   min-height: 100vh;
+}
+
+.wrapper {
+  min-height: 100vh;
+  overflow: scroll;
+}
+
+@media (min-width: 1000px) {
+  .wrapper {
+    margin: 0 auto;
+    width: 1300px;
+    overflow: hidden;
+  }
 }

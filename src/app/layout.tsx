@@ -31,8 +31,7 @@ export default function RootLayout({
           <SpotifyBar />
           <div className="wrapper">
             <Menu />
-
-            <div className="content">{children}</div>
+            {children}
           </div>
         </main>
       </body>

@@ -16,6 +16,7 @@
   margin: 16px;
   display: flex;
   cursor: grab;
+  rotate: 200deg;
 }
 
 .container:active {
@@ -50,5 +51,9 @@
 
   .banner {
     top: 40%;
+  }
+
+  #mobileMenu {
+    display: block;
   }
 }

@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-export const Canvas: React.FC<{ isPlaying: boolean }> = () => {
+export const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mediaRecorder, setMediaRecorder] = useState<any>(null);
   const [isFinishedAnimation, setIsFinishedAnimation] = useState(false);
