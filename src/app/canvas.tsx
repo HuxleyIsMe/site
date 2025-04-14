@@ -14,7 +14,7 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
     const chunks = [];
     const options = { mimeType: "video/webm; codecs=vp9" };
 
-    const stream = canvas.captureStream(25); // 25 FPS
+    const stream = canvas.captureStream(20); // 25 FPS
 
     const mediaRecorder = new MediaRecorder(stream, options);
 
@@ -49,8 +49,8 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
     // because it would get reset
     let animation = undefined as unknown as number;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.7;
+    canvas.width = window.innerWidth * window.devicePixelRatio;
+    canvas.height = window.innerHeight * window.devicePixelRatio * 0.7;
 
     const totalCircles = 100;
     const amplitude = 130;
@@ -66,7 +66,7 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
         const y =
           i * (canvas.height / totalCircles) + Math.sin(i * 0.3) * amplitude;
 
-        circles.push(() => ctx.arc(x, y, 200, 0, Math.PI * 2));
+        circles.push(() => ctx.arc(x, y, 350, 0, Math.PI * 2));
       }
 
       return circles;
@@ -124,11 +124,13 @@ export const Canvas: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
     <>
       <canvas
         ref={canvasRef}
-        style={{ visibility: isFinishedAnimation ? "visible" : "visible" }}
+        style={{ visibility: isFinishedAnimation ? "hidden" : "visible" }}
       />
       <video
         ref={videoRef}
-        style={{ position: "absolute", height: 100 + "%" }}
+        role="none"
+        aria-description="A video of squiqqly colored circles meandering across the screen"
+        style={{ position: "absolute", height: 100 + "%", width: 100 + "%" }}
         autoPlay
         loop
         muted
