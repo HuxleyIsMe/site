@@ -43,13 +43,3 @@
 .invert {
   filter: invert(50);
 }
-
-@keyframes fadeOut {
-  0% {
-    width: fit-content;
-  }
-  100% {
-    width: 0px;
-    display: none;
-  }
-}

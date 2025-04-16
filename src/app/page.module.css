@@ -4,7 +4,7 @@
 
 .container {
   height: 500px;
-  margin-top: 150px;
+  margin-top: 15%;
   clip-path: circle(50%);
   filter: hue-rotate(280deg) blur(50px);
   display: flex;
@@ -13,7 +13,7 @@
 
 .banner {
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: 100%;
   text-align: center;
   left: 0;
