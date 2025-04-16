@@ -2,22 +2,21 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
-import { useWindowSize } from "./useWindowSize.ts";
+import { useWindowSize } from "./useWindowSize";
 import Link from "next/link";
 import styles from "./menu.module.css";
 
 export const Menu = React.memo(() => {
-  const [toggleMenu, setToggleMenu] = React.useState(true);
-
-  const { width } = useWindowSize();
-
   const [mobileTarget, setMobileTarget] = React.useState<HTMLElement | null>(
     null
   );
 
+  const [toggleMenu, setToggleMenu] = React.useState(true);
+
+  const { width } = useWindowSize();
+
   React.useEffect(() => {
-    let targetForMobileMenu = document.getElementById("mobileMenu");
-    setMobileTarget(targetForMobileMenu);
+    setMobileTarget(document.getElementById("mobileMenu"));
   }, []);
 
   const menuComponentToUse = React.useMemo(() => {
@@ -75,7 +74,9 @@ export const Menu = React.memo(() => {
         </div>
       );
     }
-  }, [width, toggleMenu]);
+  }, [width, toggleMenu, mobileTarget]);
 
   return <>{menuComponentToUse}</>;
 });
+
+Menu.displayName = "Menu";

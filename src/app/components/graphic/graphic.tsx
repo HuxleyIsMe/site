@@ -35,7 +35,7 @@ export const Graphic: React.FC = () => {
     if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
       setIsReadyToAnimate(true);
     }
-  }, []);
+  }, [isReadyToAnimate]);
 
   useEffect(() => {
     if (canvasRef.current && videoRef.current !== null) {
@@ -49,7 +49,7 @@ export const Graphic: React.FC = () => {
         if (e.data.size > 0) chunks.push(e.data);
       };
 
-      let video = videoRef.current;
+      const video = videoRef.current;
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(chunks, { type: "video/webm" });
@@ -86,7 +86,6 @@ export const Graphic: React.FC = () => {
 
       <video
         ref={videoRef}
-        role="none"
         aria-description="A video of squiqqly colored circles meandering across the screen"
         style={{
           position: "absolute",

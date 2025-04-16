@@ -1,0 +1,20 @@
+.sidebar {
+  min-width: 300px;
+  padding: 0px 4px;
+  margin-right: 32px;
+  list-style: none;
+  border-right: 4pt solid rgb(255, 192, 192);
+
+  & li {
+    margin: 8px 32px 8px 0px;
+    padding: 12px 0px;
+    border-bottom: 2pt solid rgb(255, 192, 192);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    margin-bottom: 16px;
+  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable   @typescript-eslint/no-unused-vars*/
 const response = {
   creator: "Huxley Millard",
   title: "Let’s talk JS Asynchronicity and promises in JS: Part 1",

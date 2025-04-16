@@ -49,7 +49,7 @@ export const Canvas: React.FC<CanvasI> = ({
     const ourCircles = () => {
       const SPICE = 0.3; // to give some fun variation
       const CIRCLE_WIDTH = goBig ? 150 : 125;
-      let circles = [];
+      const circles = [];
       for (let i = 0; i < TOTAL_CIRCLES; i++) {
         const x = i * spacing;
         const y =
@@ -78,7 +78,7 @@ export const Canvas: React.FC<CanvasI> = ({
         ctx.fillStyle = `hsl(${(hue + time * 50) % 360}, 100%, 50%, 0.7)`;
 
         // We make the unique key created and effectively simplify the pattern to match
-        let key = `${((hue + time * 50) % 360).toFixed(2)}${i}`;
+        const key = `${((hue + time * 50) % 360).toFixed(2)}${i}`;
 
         if (animationFrameLib[key]) {
           console.log("i have found a repeat");
@@ -103,7 +103,7 @@ export const Canvas: React.FC<CanvasI> = ({
     return () => {
       cancelAnimationFrame(animation);
     };
-  }, []);
+  }, [handleAnimationCompleted, canvasRef]); // we don't actually need the canvas ref but eslint complains
 
   return <canvas ref={canvasRef} style={{ position: "absolute" }} />;
 };

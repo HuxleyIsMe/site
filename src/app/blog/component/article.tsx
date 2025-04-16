@@ -16,7 +16,7 @@ export const Article = memo(
     const searchParams = useSearchParams();
     const blogUUID = searchParams.get("blog");
 
-    let item = items.find((blog) => blog.guid === blogUUID) || defaultArticle;
+    const item = items.find((blog) => blog.guid === blogUUID) || defaultArticle;
 
     return (
       <div className={styles.article}>
@@ -26,3 +26,5 @@ export const Article = memo(
     );
   }
 );
+
+Article.displayName = "Article";

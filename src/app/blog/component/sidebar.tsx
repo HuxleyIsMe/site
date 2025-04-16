@@ -1,4 +1,5 @@
 "use client";
+import styles from "./sidebar.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { MediumArticle } from "../types";
 
@@ -13,7 +14,7 @@ export const SideBar = ({ items }: { items: MediumArticle[] }) => {
   };
 
   return (
-    <ul>
+    <ul className={styles.sidebar}>
       {items.map((item) => {
         return (
           <li onClick={() => handleClick(item.guid)} key={item.guid}>
