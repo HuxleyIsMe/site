@@ -2,15 +2,17 @@ import styles from "./page.module.css";
 import Parser from "rss-parser";
 import { Article } from "./component/article";
 import { SideBar } from "./component/sidebar";
+import type { MediumArticle } from "./types";
 
 export default async function Blog() {
   const rssParser = new Parser();
 
-  const feed = await rssParser.parseURL(
+  const feed = (await rssParser.parseURL(
     "https://medium.com/feed/@huxley.millard"
-  );
+  )) as { items: MediumArticle[] };
 
-  console.log(feed.items);
+  const defaultArticle = feed.items[0]; // latest article will go in place
+
   return (
     <>
       <div className={styles.container}>
@@ -18,7 +20,7 @@ export default async function Blog() {
         <div className={styles.BlogContainer}>
           <SideBar items={feed.items} />
           <div>
-            <Article items={feed.items} />
+            <Article items={feed.items} defaultArticle={defaultArticle} />
           </div>
         </div>
       </div>

@@ -1,11 +1,12 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
+import type { MediumArticle } from "../types";
 
-export const SideBar = ({ items }) => {
+export const SideBar = ({ items }: { items: MediumArticle[] }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleClick = (blogId) => {
+  const handleClick = (blogId: MediumArticle["guid"]) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("blog", blogId);
     router.push(`?${params.toString()}`);
