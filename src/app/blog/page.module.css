@@ -1,5 +1,5 @@
 .container {
-  max-width: 500px;
+  max-width: 1000px;
   margin: 16px;
 }
 
@@ -19,6 +19,7 @@
       margin: 8px 32px 8px 0px;
       padding: 12px 0px;
       border-bottom: 2pt solid rgb(255, 192, 192);
+      cursor: pointer;
     }
   }
 }

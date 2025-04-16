@@ -1,6 +1,7 @@
-import Parser from "rss-parser";
 import styles from "./page.module.css";
+import Parser from "rss-parser";
 import { Article } from "./component/article";
+import { SideBar } from "./component/sidebar";
 
 export default async function Blog() {
   const rssParser = new Parser();
@@ -9,20 +10,15 @@ export default async function Blog() {
     "https://medium.com/feed/@huxley.millard"
   );
 
+  console.log(feed.items);
   return (
     <>
       <div className={styles.container}>
         <h1>BLOG</h1>
         <div className={styles.BlogContainer}>
-          <ul>
-            {feed.items.map((item, index) => {
-              return <li>{item.title}</li>;
-            })}
-          </ul>
+          <SideBar items={feed.items} />
           <div>
-            {feed.items.map((item, index) => {
-              return <Article key={index} item={item} />;
-            })}
+            <Article items={feed.items} />
           </div>
         </div>
       </div>
