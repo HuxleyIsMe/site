@@ -13,13 +13,17 @@ export default async function Blog() {
     <>
       <div className={styles.container}>
         <h1>BLOG</h1>
-        <p>
-          This site is currently in progress, I will add things as I make them.
-        </p>
-        <div>
-          {feed.items.map((item, index) => {
-            return <Article key={index} item={item} />;
-          })}
+        <div className={styles.BlogContainer}>
+          <ul>
+            {feed.items.map((item, index) => {
+              return <li>{item.title}</li>;
+            })}
+          </ul>
+          <div>
+            {feed.items.map((item, index) => {
+              return <Article key={index} item={item} />;
+            })}
+          </div>
         </div>
       </div>
     </>
