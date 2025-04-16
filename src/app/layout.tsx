@@ -33,6 +33,9 @@ export default function RootLayout({
             <Menu />
             <div className="content">{children}</div>
           </div>
+          <footer>
+            <p>&copy;copyright huxleyIsMe</p>
+          </footer>
         </main>
       </body>
     </html>
