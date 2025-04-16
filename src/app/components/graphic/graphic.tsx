@@ -1,5 +1,11 @@
 "use client";
-import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import {
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useCallback,
+} from "react";
 import { Canvas } from "./components/canvas";
 
 /**
@@ -57,29 +63,24 @@ export const Graphic: React.FC = () => {
     }
   }, [isReadyToAnimate]);
 
-  /**
-   * The animations takes roughly 10s to fully play through
-   * so this warning is correct, in our case we can guarentee this is
-   * going to be here by then
-   * we use useLayoureffect as our recorder onstop handler is in charge of triggerring
-   * video playback, effectively we get the vido playing before we remove the original canvas
-   * element reducing the flicker that we see
-   */
-  useLayoutEffect(() => {
-    if (animationHasCycled && recorderRef.current !== null) {
+  const handleAnimationEnded = useCallback(() => {
+    if (recorderRef.current) {
       recorderRef.current.stop();
-      console.log("should be on video");
     }
-  }, [animationHasCycled]);
+    // We want to give the video some time to start playing before
+    // removing the canvas to make it look like a seemless hand over
+    setTimeout(() => {
+      setAnimationHasCycled(true);
+      console.log("should be on video");
+    }, 200);
+  }, []);
 
   return (
     <>
       {!animationHasCycled && (
         <Canvas
           canvasRef={canvasRef}
-          handleAnimationCompleted={() => {
-            setAnimationHasCycled(true);
-          }}
+          handleAnimationCompleted={handleAnimationEnded}
         />
       )}
 

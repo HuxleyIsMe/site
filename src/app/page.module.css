@@ -4,7 +4,7 @@
 
 .container {
   height: 500px;
-  margin-top: 150px;
+  margin-top: 15%;
   clip-path: circle(50%);
   filter: hue-rotate(280deg) blur(50px);
   display: flex;
