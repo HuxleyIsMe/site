@@ -23,3 +23,13 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .BlogContainer {
+    flex-wrap: wrap;
+
+    ul {
+      margin-bottom: 16px;
+    }
+  }
+}
