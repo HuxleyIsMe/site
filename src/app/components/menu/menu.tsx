@@ -38,7 +38,7 @@ export const Menu = React.memo(() => {
                 <Link href="/">From: huxley millard</Link>
               </li>
               <li>
-                <Link href="/work">work</Link>
+                <Link href="/blog">blog</Link>
               </li>
 
               <li>
@@ -61,7 +61,7 @@ export const Menu = React.memo(() => {
               <Link href="/">From: huxley millard</Link>
             </li>
             <li>
-              <Link href="/work">work</Link>
+              <Link href="/blog">blog</Link>
             </li>
 
             <li>
