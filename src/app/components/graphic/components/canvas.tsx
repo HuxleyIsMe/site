@@ -22,8 +22,11 @@ export const Canvas: React.FC<CanvasI> = ({
 
     if (!ctx) return;
 
-    canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * window.devicePixelRatio * 0.6;
+    canvas.width =
+      window.innerWidth *
+      window.devicePixelRatio *
+      (window.innerHeight > 800 ? 0.7 : 0.5);
+    canvas.height = window.innerHeight * window.devicePixelRatio * 0.5;
 
     // We need to have a higher scop reference to animation
     // this value will take the animation ID and use it in the clean up to
@@ -44,7 +47,7 @@ export const Canvas: React.FC<CanvasI> = ({
      */
     const ourCircles = () => {
       const SPICE = 0.3; // to give some fun variation
-      const CIRCLE_WIDTH = 160;
+      const CIRCLE_WIDTH = 130;
       let circles = [];
       for (let i = 0; i < TOTAL_CIRCLES; i++) {
         const x = i * spacing;
