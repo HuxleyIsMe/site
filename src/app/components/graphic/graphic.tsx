@@ -20,8 +20,9 @@ import { Canvas } from "./components/canvas";
  * 2) Then creating a recorder that will record the canvas and play the video
  * 3) getting the canvas to begin animation  that we record
  * 4) Once the canvas has animated a rough loop we tell the recorder we are done
- * 5) we hide the canvas and tell it not to play anymore
- * 6) we make the video play back the saved recording
+ * 5) we make the video play back the saved recording
+ * 6) we hide the canvas and tell it not to play anymore
+ *
  */
 export const Graphic: React.FC = () => {
   const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
@@ -71,7 +72,6 @@ export const Graphic: React.FC = () => {
     // removing the canvas to make it look like a seemless hand over
     setTimeout(() => {
       setAnimationHasCycled(true);
-      console.log("should be on video");
     }, 200);
   }, []);
 
@@ -92,6 +92,7 @@ export const Graphic: React.FC = () => {
           position: "absolute",
           height: canvasRef.current?.height,
           width: canvasRef.current?.width,
+          overflow: "visible",
           aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
         }}
         autoPlay
