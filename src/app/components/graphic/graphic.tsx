@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Canvas } from "./components/canvas";
 
 /**
@@ -24,7 +24,7 @@ export const Graphic: React.FC = () => {
   const recorderRef = useRef<MediaRecorder>(null);
   const [animationHasCycled, setAnimationHasCycled] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
       setIsReadyToAnimate(true);
     }
@@ -69,14 +69,22 @@ export const Graphic: React.FC = () => {
     }
   }, [animationHasCycled]);
 
+  console.log({
+    heihgt: canvasRef.current?.height,
+    width: canvasRef.current?.width,
+  });
+
   return (
     <>
       {!animationHasCycled && (
         <Canvas
           canvasRef={canvasRef}
-          handleAnimationCompleted={() => setAnimationHasCycled(true)}
+          handleAnimationCompleted={() => {
+            setAnimationHasCycled(true);
+          }}
         />
       )}
+
       <video
         ref={videoRef}
         role="none"
@@ -85,6 +93,7 @@ export const Graphic: React.FC = () => {
           position: "absolute",
           height: canvasRef.current?.height,
           width: canvasRef.current?.width,
+          aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
         }}
         autoPlay
         loop

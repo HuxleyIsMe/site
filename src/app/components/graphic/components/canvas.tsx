@@ -89,6 +89,9 @@ export const Canvas: React.FC<CanvasI> = ({
         ctx.fill();
       });
 
+      // ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // ctx.fillStyle = `hsl(222), 100%, 50%, 0.7)`;
+
       time += SPEED;
 
       animation = requestAnimationFrame(animate);
@@ -101,5 +104,5 @@ export const Canvas: React.FC<CanvasI> = ({
     };
   }, []);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} style={{ position: "absolute" }} />;
 };
