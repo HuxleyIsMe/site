@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 interface CanvasI {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -14,7 +14,7 @@ export const Canvas: React.FC<CanvasI> = ({
   canvasRef,
   handleAnimationCompleted,
 }) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -88,9 +88,6 @@ export const Canvas: React.FC<CanvasI> = ({
         c();
         ctx.fill();
       });
-
-      // ctx.fillRect(0, 0, canvas.width, canvas.height);
-      // ctx.fillStyle = `hsl(222), 100%, 50%, 0.7)`;
 
       time += SPEED;
 

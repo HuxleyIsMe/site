@@ -61,18 +61,16 @@ export const Graphic: React.FC = () => {
    * The animations takes roughly 10s to fully play through
    * so this warning is correct, in our case we can guarentee this is
    * going to be here by then
+   * we use useLayoureffect as our recorder onstop handler is in charge of triggerring
+   * video playback, effectively we get the vido playing before we remove the original canvas
+   * element reducing the flicker that we see
    */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (animationHasCycled && recorderRef.current !== null) {
       recorderRef.current.stop();
       console.log("should be on video");
     }
   }, [animationHasCycled]);
-
-  console.log({
-    heihgt: canvasRef.current?.height,
-    width: canvasRef.current?.width,
-  });
 
   return (
     <>
