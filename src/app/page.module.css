@@ -14,7 +14,8 @@
 .banner {
   position: absolute;
   top: 20%;
-  width: 100%;
+  width: 300px;
+
   text-align: center;
   left: 0;
   letter-spacing: 8px;
@@ -32,6 +33,11 @@
   & h2 {
     font-size: 1.5em;
   }
+}
+
+.tagline {
+  color: rgb(227, 14, 206);
+  width: 300px;
 }
 
 @media only screen and (max-width: 500px) {

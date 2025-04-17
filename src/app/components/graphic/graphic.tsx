@@ -92,6 +92,7 @@ export const Graphic: React.FC = () => {
           height: canvasRef.current?.height,
           width: canvasRef.current?.width,
           overflow: "visible",
+          PointerEvent: "none",
           aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
         }}
         autoPlay

@@ -9,8 +9,10 @@ export default function Home() {
           <Graphic />
         </div>
         <div className={styles.banner}>
-          <h1>hi im huxley</h1>
-          <h2 className={`${styles.tagline}`}>I make web things</h2>
+          <h1>hi im huxley, a full-stack engineer</h1>
+          <h2 className={`${styles.tagline}`}>
+            expereinced with TS, Node, GQL REACT, JS and AWS
+          </h2>
         </div>
       </section>
     </>

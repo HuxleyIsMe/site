@@ -8,7 +8,7 @@ interface CanvasI {
 // constants we use to draw our animation
 const TOTAL_CIRCLES = 100;
 const AMPLITUDE = 120;
-const SPEED = 0.03;
+const SPEED = 0.05;
 
 export const Canvas: React.FC<CanvasI> = ({
   canvasRef,
@@ -105,5 +105,10 @@ export const Canvas: React.FC<CanvasI> = ({
     };
   }, [handleAnimationCompleted, canvasRef]); // we don't actually need the canvas ref but eslint complains
 
-  return <canvas ref={canvasRef} style={{ position: "absolute" }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: "absolute", PointerEvent: "none", zIndex: 4 }}
+    />
+  );
 };
