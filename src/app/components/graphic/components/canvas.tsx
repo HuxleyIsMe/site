@@ -111,7 +111,7 @@ export const Canvas: React.FC<CanvasI> = ({
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: "absolute", PointerEvent: "none", zIndex: 4 }}
+      style={{ position: "absolute", pointerEvents: "none", zIndex: 4 }}
     />
   );
 };
