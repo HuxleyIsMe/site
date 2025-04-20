@@ -35,6 +35,18 @@ export default function RootLayout({
           </div>
           <footer>
             <p>&copy;copyright huxleyIsMe</p>
+            <img
+              className="icons"
+              src="/images/github.svg"
+              width="30px"
+              height="30px"
+            />
+            <img
+              className="icons"
+              src="/images/linkedin.svg"
+              width="30px"
+              height="30px"
+            />
           </footer>
         </main>
       </body>

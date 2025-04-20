@@ -4,40 +4,41 @@
 
 .container {
   height: 500px;
-  margin-top: 15%;
+  margin-top: 20%;
   clip-path: circle(50%);
-  filter: hue-rotate(280deg) blur(50px);
+  filter: hue-rotate(280deg) blur(55px);
   display: flex;
   rotate: 190deg;
 }
 
 .banner {
   position: absolute;
-  top: 20%;
-  width: 350px;
+  height: 200px;
+  overflow: hidden;
+
+  width: 450px;
+  top: calc(50% - 100px);
 
   text-align: center;
-  left: 0;
+  left: calc(50% - 225px);
   letter-spacing: 8px;
   color: rgb(227, 14, 206);
   mix-blend-mode: difference;
   z-index: 6;
+  text-align: center;
 
   & h1 {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 2.5em;
-    font-weight: 800;
+    font-size: 3em;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
     margin-bottom: 8px;
   }
 
   & h2 {
-    font-size: 1.5em;
+    font-size: 1em;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
   }
-}
-
-.tagline {
-  color: rgb(227, 14, 206);
-  width: 350px;
 }
 
 @media only screen and (max-width: 500px) {

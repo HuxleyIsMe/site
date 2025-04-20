@@ -9,13 +9,15 @@ export default function Home() {
           <Graphic />
         </div>
         <div className={styles.banner}>
-          <h1>hi im huxley, a full-stack engineer</h1>
-          <h2 className={`${styles.tagline}`}>
-            expereinced with TS, Node, GQL REACT, JS, AWS and leading team
-            processes
-          </h2>
+          <h1>hi im huxley</h1>
+          <h2>A full-stack engineer</h2>
         </div>
       </section>
     </>
   );
 }
+
+/**
+ *  expereinced with TS, Node, GQL, React, JS, AWS
+            and leading team processes
+ */
