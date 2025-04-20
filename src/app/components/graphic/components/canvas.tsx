@@ -6,7 +6,7 @@ interface CanvasI {
 }
 
 // constants we use to draw our animation
-const TOTAL_CIRCLES = 100;
+const TOTAL_CIRCLES = 80;
 const AMPLITUDE = 100;
 const SPEED = 0.05;
 
