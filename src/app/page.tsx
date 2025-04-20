@@ -1,6 +1,5 @@
 import styles from "./page.module.css";
 import { Graphic } from "./components/index";
-import { LogoBoard } from "./components/logo-board/logo-board";
 
 export default function Home() {
   return (
@@ -16,9 +15,6 @@ export default function Home() {
             processes
           </h2>
         </div>
-      </section>
-      <section>
-        <LogoBoard />
       </section>
     </>
   );

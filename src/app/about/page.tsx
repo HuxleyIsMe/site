@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { LogoBoard } from "./components/logo-board/logo-board";
 
 export default function About() {
   return (
@@ -25,7 +26,7 @@ export default function About() {
               </div>
             </div>
           </div>
-          <span className={styles.graphic}>
+          {/* <span className={styles.graphic}>
             <div role="presentation" aria-hidden="true">
               REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
               CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
@@ -85,8 +86,8 @@ export default function About() {
               JEST - REACT - VUE - SQL - AGILE - JIRA - SPLUNK - GIT - GIT HUB -
               REACT - TYPESCRIPT - JAVASCRIPT - AWS - GQL - TDD - NODE - HTML -
               CSS - STORYBOOK - GRAFANA - CIRCLE CI - JEST - REACT - VUE - SQL -
-            </div>
-            <p
+            </div> */}
+          {/* <p
               className={styles.overlay}
               role="contentinfo"
               aria-hidden="false"
@@ -98,10 +99,10 @@ export default function About() {
               each environment. I have a growth mindset and am confident in my
               ability to work it out.
             </p>
-          </span>
+          </span> */}
         </div>
         <div>
-          <h2>My Tech house</h2>
+          <LogoBoard />
         </div>
       </main>
     </div>
