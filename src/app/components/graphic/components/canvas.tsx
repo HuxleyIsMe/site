@@ -52,8 +52,12 @@ export const Canvas: React.FC<CanvasI> = ({
       const circles = [];
       for (let i = 0; i < TOTAL_CIRCLES; i++) {
         const x = i * spacing;
-        const y =
-          i * (canvas.height / TOTAL_CIRCLES) + Math.sin(i * SPICE) * AMPLITUDE; // 0.3 is a little sal
+        const y = Math.floor(
+          i * (canvas.height / TOTAL_CIRCLES) + Math.sin(i * SPICE) * AMPLITUDE
+        ); // using floor is an attempt to rid us of floating numbers
+        // https://web.dev/articles/canvas-performance
+        // ensuring that we we use whole numbers we are avoiding the canvas from having to
+        // compute complex maths in order to render the circles correctly in position
 
         circles.push(() => ctx.arc(x, y, CIRCLE_WIDTH, 0, Math.PI * 2));
       }
@@ -87,7 +91,6 @@ export const Canvas: React.FC<CanvasI> = ({
         } else {
           animationFrameLib[key] = true;
         }
-
         ctx.beginPath();
         c();
         ctx.fill();

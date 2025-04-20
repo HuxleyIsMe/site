@@ -100,6 +100,9 @@ export default function Home() {
             </p>
           </span>
         </div>
+        <div>
+          <h2>My Tech house</h2>
+        </div>
       </main>
     </div>
   );
