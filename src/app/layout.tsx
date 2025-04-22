@@ -15,6 +15,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://huxely-is-me.vercel.app/"),
+  openGraph: {
+    title: "Huxley Millard",
+    description: "A work in progress website for me",
+    images: [
+      {
+        url: `/opengraph-image.webp"`,
+        width: 1200,
+        height: 630,
+        alt: `Preview image for Huxley Millard site`,
+      },
+    ],
+  },
   title: "Huxley Millard",
   description: "A work in progress little site to say hello",
 };
