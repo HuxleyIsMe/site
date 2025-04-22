@@ -100,3 +100,7 @@ footer {
 .icons {
   margin: 0px 4px;
 }
+
+.scale {
+  transform: scale(0.9) translateY(-47px);
+}

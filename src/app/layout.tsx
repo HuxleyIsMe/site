@@ -30,7 +30,7 @@ export default function RootLayout({
         <main className="page">
           <menu id="mobileMenu"></menu>
           <SpotifyBar />
-          <div className="wrapper">
+          <div className="wrapper scale">
             <Menu />
             <div className="content">{children}</div>
           </div>
