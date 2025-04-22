@@ -23,6 +23,7 @@ export default function Home() {
               <Image
                 height={500}
                 width={400}
+                priority
                 alt="picture of animation on desktop site"
                 src="/images/me2.png"
               />
