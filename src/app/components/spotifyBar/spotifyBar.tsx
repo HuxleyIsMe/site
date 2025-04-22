@@ -10,17 +10,13 @@ export const SpotifyBar = () => {
         {showSpotifyBar && (
           <iframe
             style={{
-              borderRadius: 0 + "px",
               height: 100 + "%",
               width: 300 + "px",
-              rotate: 0 + "deg",
-              right: 0 + "px",
               writingMode: "vertical-rl",
               textOrientation: "mixed",
             }}
             src="https://open.spotify.com/embed/playlist/5h2mDKoK7yWIx0392HmQCt?utm_source=generator"
             width="100%"
-            height="152"
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"

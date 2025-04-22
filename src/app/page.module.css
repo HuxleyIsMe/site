@@ -36,6 +36,7 @@
 .aboutLine {
   font-family: "Courier New", Courier, monospace;
   width: 500px;
+  margin-top: -90px;
 
   margin-left: 40px;
 }
