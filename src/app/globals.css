@@ -57,6 +57,7 @@ a {
 }
 
 footer {
+  margin-top: -100px;
   text-align: center;
   font-family: "Courier New", Courier, monospace;
 }
