@@ -28,9 +28,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <main className="page">
-          <menu id="mobileMenu"></menu>
           <SpotifyBar />
-          <div className="wrapper scale">
+          <div className="wrapper">
             <Menu />
             <div className="content">{children}</div>
           </div>

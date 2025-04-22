@@ -1,5 +1,6 @@
 .wrapper {
   position: relative;
+  transform: scale(0.9) translateY(-47px);
 }
 
 .container {
