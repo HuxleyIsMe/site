@@ -11,6 +11,35 @@
   rotate: 190deg;
 }
 
+.banner-mobile {
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  letter-spacing: 8px;
+
+  text-align: center;
+
+  & h1 {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    margin-bottom: 8px;
+  }
+
+  & h2 {
+    font-size: 1em;
+    font-family: Helvetica, Arial, sans-serif;
+    margin-bottom: 12px;
+  }
+}
+
+.aboutLine {
+  font-family: "Courier New", Courier, monospace;
+  width: 500px;
+
+  margin-left: 40px;
+}
+
 .banner {
   position: absolute;
   height: 200px;

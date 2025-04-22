@@ -1,28 +1,19 @@
 "use client";
 
 import React from "react";
-import { createPortal } from "react-dom";
 import { useWindowSize } from "./useWindowSize";
 import Link from "next/link";
 import styles from "./menu.module.css";
 
-export const Menu = React.memo(() => {
-  const [mobileTarget, setMobileTarget] = React.useState<HTMLElement | null>(
-    null
-  );
-
+export const Menu = () => {
   const [toggleMenu, setToggleMenu] = React.useState(true);
 
   const { width } = useWindowSize();
 
-  React.useEffect(() => {
-    setMobileTarget(document.getElementById("mobileMenu"));
-  }, []);
-
-  const menuComponentToUse = React.useMemo(() => {
-    if (width < 600 && mobileTarget) {
-      return createPortal(
-        <div className={styles.wrapper}>
+  return (
+    <>
+      <div className={styles.wrapper}>
+        {width < 600 && (
           <button
             className={styles.menuButton}
             role="button"
@@ -30,31 +21,9 @@ export const Menu = React.memo(() => {
           >
             Menu
           </button>
+        )}
 
-          {toggleMenu && (
-            <ul className={styles.menu}>
-              <li>
-                <Link href="/">From: huxley millard</Link>
-              </li>
-              <li>
-                <Link href="/blog">blog</Link>
-              </li>
-
-              <li>
-                <Link href="/currently">currently</Link>
-              </li>
-
-              <li>
-                <Link href="/about">about</Link>
-              </li>
-            </ul>
-          )}
-        </div>,
-        mobileTarget
-      );
-    } else {
-      return (
-        <div className={styles.wrapper}>
+        {toggleMenu && (
           <ul className={styles.menu}>
             <li>
               <Link href="/">From: huxley millard</Link>
@@ -71,12 +40,8 @@ export const Menu = React.memo(() => {
               <Link href="/about">about</Link>
             </li>
           </ul>
-        </div>
-      );
-    }
-  }, [width, toggleMenu, mobileTarget]);
-
-  return <>{menuComponentToUse}</>;
-});
-
-Menu.displayName = "Menu";
+        )}
+      </div>
+    </>
+  );
+};
