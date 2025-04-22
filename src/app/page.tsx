@@ -12,7 +12,6 @@ export default function Home() {
     return <></>;
   }
 
-  console.log({ width });
   return (
     <>
       <section className={styles.wrapper}>
