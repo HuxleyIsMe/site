@@ -38,12 +38,14 @@ export default function RootLayout({
             <p>&copy;copyright huxleyIsMe</p>
             <img
               className="icons"
+              alt="Come checkout my Github"
               src="/images/github.svg"
               width="30px"
               height="30px"
             />
             <img
               className="icons"
+              alt="Come checkout my LinkedIn"
               src="/images/linkedin.svg"
               width="30px"
               height="30px"
