@@ -40,12 +40,9 @@
 
 .banner {
   position: absolute;
-  height: 200px;
   overflow: hidden;
-
   width: 450px;
-  top: calc(50% - 100px);
-
+  top: calc(0% + 150px);
   text-align: center;
   left: calc(50% - 225px);
   letter-spacing: 8px;
