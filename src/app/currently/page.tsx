@@ -11,11 +11,6 @@ export default function Home() {
           taking a short pause until May to reset and refocus, and I&apos;d love
           to connect in the meantime—please keep me in mind!
         </p>
-        <div>
-          <span>
-            <a href="mailto:huxley.millard@gmail.com">Send email</a>
-          </span>
-        </div>
       </div>
     </div>
   );

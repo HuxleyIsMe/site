@@ -36,9 +36,9 @@ export const Menu = () => {
               <Link href="/currently">currently</Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link href="/about">about</Link>
-            </li>
+            </li> */}
           </ul>
         )}
       </div>
