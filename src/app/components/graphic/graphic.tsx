@@ -72,7 +72,7 @@ export const Graphic: React.FC = () => {
     // removing the canvas to make it look like a seemless hand over
     setTimeout(() => {
       setAnimationHasCycled(true);
-    }, 200);
+    }, 500);
   }, []);
 
   return (
@@ -88,6 +88,7 @@ export const Graphic: React.FC = () => {
         ref={videoRef}
         aria-description="A video of squiqqly colored circles meandering across the screen"
         style={{
+          transform: "scale(1.15)",
           position: "absolute",
           height: canvasRef.current?.height,
           width: canvasRef.current?.width,
