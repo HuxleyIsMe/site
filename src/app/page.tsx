@@ -7,6 +7,12 @@ import { useWindowSize } from "./components/menu/useWindowSize";
 
 export default function Home() {
   const { width } = useWindowSize();
+
+  if (!width) {
+    return <></>;
+  }
+
+  console.log({ width });
   return (
     <>
       <section className={styles.wrapper}>
