@@ -91,7 +91,6 @@ export const Graphic: React.FC = () => {
           position: "absolute",
           height: canvasRef.current?.height,
           width: canvasRef.current?.width,
-          overflow: "visible",
           pointerEvents: "none",
           aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
         }}

@@ -29,6 +29,7 @@ export const SpotifyBar = () => {
         <div className={styles.spotifyPlayerTab}>
           <button
             className={styles.spotifyLogo}
+            aria-label="toggle spotify tab; listen to my tunes"
             aria-description={
               showSpotifyBar
                 ? "stop music close spotify player"
