@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 
 interface CanvasI {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
-  handleAnimationCompleted: () => void;
+  handleAnimationCompleted: (cb: () => void) => void;
 }
 
 // constants we use to draw our animation
@@ -47,7 +47,7 @@ export const Canvas: React.FC<CanvasI> = ({
       const CIRCLE_WIDTH = 150;
       const circles = [];
       for (let i = 0; i < TOTAL_CIRCLES; i++) {
-        const x = i * spacing;
+        const x = Math.floor(i * spacing);
         const y = Math.floor(
           i * (canvas.height / TOTAL_CIRCLES) + Math.sin(i * SPICE) * AMPLITUDE
         ); // using floor is an attempt to rid us of floating numbers
@@ -62,37 +62,62 @@ export const Canvas: React.FC<CanvasI> = ({
     };
 
     const circles = ourCircles();
+    const colors = (): { colors: string[]; cutOf: number } => {
+      let colors = [] as string[];
 
-    /**
-     * We have to detect when the animation has ended, this is pretty hard to do
-     * due to the spice we let the program trial, therefore we will capture until something
-     * repeats this will indicate to us the animation has looped.
-     */
-    const animationFrameLib: { [key: string]: boolean } = {};
+      /**
+       * We have to detect when the animation has ended, this is pretty hard to do
+       * due to the spice we let the program trial, therefore we will capture until something
+       * repeats this will indicate to us the animation has looped.
+       */
+      const animationFrameLib: { [key: string]: boolean } = {};
+      let looped = false;
+
+      while (!looped) {
+        circles.forEach((_, i) => {
+          const hue = i * (360 / TOTAL_CIRCLES);
+          colors.push(`hsl(${(hue + time * 50) % 360}, 100%, 50%, 0.7)`);
+
+          // We make the unique key created and effectively simplify the pattern to match
+          const key = `${((hue + time * 50) % 360).toFixed(2)}${i}`;
+
+          if (animationFrameLib[key]) {
+            looped = true;
+            // if something looks 'similiar' to before we end the animation
+          } else {
+            animationFrameLib[key] = true;
+          }
+        });
+
+        time += SPEED;
+      }
+
+      // we need to add a buffer of frames for the canvas to use while it swaps
+      // so we simply double it!
+
+      return { colors: [...colors, ...colors], cutOf: colors.length };
+    };
+
+    const hues = colors();
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      if (hues.colors.length === hues.cutOf) {
+        console.log("finished loop");
+        // @ts-ignore
+        handleAnimationCompleted(() => {
+          canvasRef.current!.style.display = "none";
+          cancelAnimationFrame(animation);
+        });
+      }
+
       circles.forEach((c, i) => {
-        const hue = i * (360 / TOTAL_CIRCLES);
-        ctx.fillStyle = `hsl(${(hue + time * 50) % 360}, 100%, 50%, 0.7)`;
-
-        // We make the unique key created and effectively simplify the pattern to match
-        const key = `${((hue + time * 50) % 360).toFixed(2)}${i}`;
-
-        if (animationFrameLib[key]) {
-          console.log("i have found a repeat");
-          // if something looks 'similiar' to before we end the animation
-          handleAnimationCompleted();
-        } else {
-          animationFrameLib[key] = true;
-        }
+        ctx.fillStyle = hues.colors.pop() as string;
         ctx.beginPath();
         c();
         ctx.fill();
       });
-
-      time += SPEED;
 
       animation = requestAnimationFrame(animate);
     };

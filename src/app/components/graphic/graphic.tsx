@@ -29,7 +29,6 @@ export const Graphic: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const recorderRef = useRef<MediaRecorder>(null);
-  const [animationHasCycled, setAnimationHasCycled] = useState(false);
 
   useLayoutEffect(() => {
     if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
@@ -64,26 +63,19 @@ export const Graphic: React.FC = () => {
     }
   }, [isReadyToAnimate]);
 
-  const handleAnimationEnded = useCallback(() => {
+  const handleAnimationEnded = useCallback((cb: () => void) => {
     if (recorderRef.current) {
       recorderRef.current.stop();
     }
     // We want to give the video some time to start playing before
     // removing the canvas to make it look like a seemless hand over
     setTimeout(() => {
-      setAnimationHasCycled(true);
-    }, 500);
+      cb();
+    }, 60);
   }, []);
 
   return (
     <>
-      {!animationHasCycled && (
-        <Canvas
-          canvasRef={canvasRef}
-          handleAnimationCompleted={handleAnimationEnded}
-        />
-      )}
-
       <video
         ref={videoRef}
         aria-description="A video of squiqqly colored circles meandering across the screen"
@@ -98,6 +90,11 @@ export const Graphic: React.FC = () => {
         autoPlay
         loop
         muted
+      />
+
+      <Canvas
+        canvasRef={canvasRef}
+        handleAnimationCompleted={handleAnimationEnded}
       />
     </>
   );
