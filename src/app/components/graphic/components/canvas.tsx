@@ -6,7 +6,7 @@ interface CanvasI {
 }
 
 // constants we use to draw our animation
-const TOTAL_CIRCLES = 80;
+const TOTAL_CIRCLES = 70;
 const AMPLITUDE = 100;
 const SPEED = 0.05;
 
@@ -22,8 +22,14 @@ export const Canvas: React.FC<CanvasI> = ({
 
     if (!ctx) return;
 
-    canvas.width = window.innerWidth * window.devicePixelRatio * 0.4;
-    canvas.height = window.innerHeight * window.devicePixelRatio * 0.4;
+    canvas.width =
+      window.innerWidth *
+      window.devicePixelRatio *
+      (window.innerWidth > 1600 ? 0.6 : 0.4);
+    canvas.height =
+      window.innerHeight *
+      window.devicePixelRatio *
+      (window.innerWidth > 1600 ? 0.6 : 0.4);
 
     // We need to have a higher scop reference to animation
     // this value will take the animation ID and use it in the clean up to
@@ -63,7 +69,7 @@ export const Canvas: React.FC<CanvasI> = ({
 
     const circles = ourCircles();
     const colors = (): { colors: string[]; cutOf: number } => {
-      let colors = [] as string[];
+      const colors = [] as string[];
 
       /**
        * We have to detect when the animation has ended, this is pretty hard to do
@@ -105,14 +111,14 @@ export const Canvas: React.FC<CanvasI> = ({
 
       if (hues.colors.length === hues.cutOf) {
         console.log("finished loop");
-        // @ts-ignore
+        // ts-expect-error typing for the cb isnt quite rigt
         handleAnimationCompleted(() => {
           canvasRef.current!.style.display = "none";
           cancelAnimationFrame(animation);
         });
       }
 
-      circles.forEach((c, i) => {
+      circles.forEach((c) => {
         ctx.fillStyle = hues.colors.pop() as string;
         ctx.beginPath();
         c();

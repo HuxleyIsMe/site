@@ -71,7 +71,7 @@ export const Graphic: React.FC = () => {
     // removing the canvas to make it look like a seemless hand over
     setTimeout(() => {
       cb();
-    }, 60);
+    }, 200);
   }, []);
 
   return (
