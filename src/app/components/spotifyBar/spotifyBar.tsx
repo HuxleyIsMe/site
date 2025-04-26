@@ -26,11 +26,6 @@ export const SpotifyBar = () => {
           <button
             className={styles.spotifyLogo}
             aria-label="toggle spotify tab; listen to my tunes"
-            aria-description={
-              showSpotifyBar
-                ? "stop music close spotify player"
-                : "start music open spotify player"
-            }
             onClick={() => setShowSpotifyBar((prev) => !prev)}
           >
             <div className={styles.invert}>
