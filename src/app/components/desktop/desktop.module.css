@@ -1,0 +1,43 @@
+
+.container {
+    height: 500px;
+    margin-top: 15%;
+    clip-path: circle(55%);
+    filter: hue-rotate(280deg) blur(50px);
+    display: flex;
+
+  }
+  
+
+  .aboutLine {
+    font-family: "Courier New", Courier, monospace;
+    width: 500px;
+    transform: translateY(-90px) translateX(40px);
+  }
+
+  .banner {
+    position: absolute;
+    overflow: hidden;
+    width: 450px;
+    top: calc(0% + 150px);
+    text-align: center;
+    left: calc(50% - 225px);
+    letter-spacing: 8px;
+    color: rgb(227, 14, 206);
+    mix-blend-mode: difference;
+    z-index: 6;
+    text-align: center;
+  
+    & h1 {
+      font-size: 3em;
+      font-weight: bold;
+      font-family: Helvetica, Arial, sans-serif;
+      margin-bottom: 8px;
+    }
+  
+    & h2 {
+      font-size: 1em;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+    }
+  }
