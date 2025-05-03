@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SpotifyBar, Menu } from "./components/index";
-
 import "./globals.css";
 
 

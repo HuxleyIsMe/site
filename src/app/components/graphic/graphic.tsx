@@ -12,11 +12,11 @@ import { Canvas } from "./components/canvas";
  *
  * This component has been made to improve performance of the animation for users
  * by swapping to a video play back of the animation instead of continuing to redraw
- * I was able to see a 30-40% reduction in my intel CPU.
+ * I was able to see a 30-40% reduction in my intel CPU. My M1 is fine.
  *
  * Essentially what we are doing is:
  *
- * 1) settting up by having both a video and a canvas element
+ * 1) setting up by having both a video and a canvas element
  * 2) Then creating a recorder that will record the canvas and play the video
  * 3) getting the canvas to begin animation  that we record
  * 4) Once the canvas has animated a rough loop we tell the recorder we are done
