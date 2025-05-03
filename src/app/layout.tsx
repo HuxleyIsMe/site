@@ -49,20 +49,24 @@ export default function RootLayout({
           </div>
           <footer>
             <p>&copy;copyright huxleyIsMe</p>
-            <img
-              className="icons"
-              alt="Come checkout my Github"
-              src="/images/github.svg"
-              width="30px"
-              height="30px"
-            />
-            <img
-              className="icons"
-              alt="Come checkout my LinkedIn"
-              src="/images/linkedin.svg"
-              width="30px"
-              height="30px"
-            />
+            < a href="https://github.com/HuxleyIsMe" target="_blank">
+              <img
+                className="icons"
+                alt="Come checkout my Github"
+                src="/images/github.svg"
+                width="30px"
+                height="30px"
+              />
+            </a>
+            < a href="https://www.linkedin.com/in/huxley-millard-456708102/" target="_blank">
+              <img
+                className="icons"
+                alt="Come checkout my LinkedIn"
+                src="/images/linkedin.svg"
+                width="30px"
+                height="30px"
+              />
+            </a>
           </footer>
         </main>
       </body>
