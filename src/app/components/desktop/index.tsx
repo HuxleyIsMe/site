@@ -3,11 +3,6 @@ import React from 'react'
 import { Graphic } from '../index'
 import styles from './desktop.module.css'
 
-const handleRotation = () => {
-    // need to know the start click then the curent rotation
-    // use the tan function to enable it
-}
-
 export const InteractiveDesktopView = () => {
     const graphicRotation = React.useRef(190)
 
