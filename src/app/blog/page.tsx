@@ -1,6 +1,6 @@
 import BlogEntry from './blog_entry.mdx'
 
-export default function MyPage({ children }: { children: any }) {
+export default function MyPage() {
     return (
         <div
             style={{
@@ -11,7 +11,6 @@ export default function MyPage({ children }: { children: any }) {
             }}
         >
             <BlogEntry />
-            {children}
         </div>
     )
 }
