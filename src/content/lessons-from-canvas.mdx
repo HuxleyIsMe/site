@@ -1,0 +1,94 @@
+<div style={{ textAlign: 'center' }}>
+    <img src="/site.png" alt="A pic of the site" width="450" height="300" />
+</div>
+
+## Lessons from this site: the hidden complexity in creating a performant animation.
+
+I recently set out to build an animated graphic using the HTML5 Canvas API. While it started as a fun experiment, I quickly ran into performance issues when running the animation on my older Intel machine. Frame rates dropped, and CPU usage shot up—sometimes to 95%. What followed was a deep dive into understanding how browser rendering works, and how hardware, particularly the GPU, can make a huge difference in animation performance.
+
+### The Problem: High CPU Usage and Dropped Frames
+
+The initial design for the animation was relatively simple, but once I started animating it, things quickly went downhill. On my Intel machine, the animation was visually flowing ok however there were numerous dropped frames, high CPU usage, and the fans on my machine were blaring like they were about to take off.
+
+I realized that the issue was due to how Canvas and JavaScript were interacting with the system. The Canvas API doesn't natively take full advantage of the GPU unless explicitly optimized. On older hardware, this results in significant strain on the CPU.
+
+I initially started troubleshooting by looking at known techniques for improving performance. I tried reducing the complexity of the animation and simplifying the drawing logic, but nothing really fixed the problem.
+
+### Exploring the Browser Paint Cycle and the CPU-GPU Relationship
+
+To understand the underlying issue, I needed to dig deeper into how the browser was rendering the animation. It turns out, the paint composition process in the browser has multiple stages:
+
+<strong>Layout</strong>: This step calculates the position and size of elements.
+
+<strong>Painting</strong>: The elements are drawn to layers.
+
+<strong>Compositing</strong>: Layers are combined into a single image.
+
+When you animate properties that affect layout or painting, the browser has to reflow, repaint, and composite everything, which is expensive.
+
+After learning this, I realized that GPU hardware could help offload a lot of this work. The browser can leverage the GPU to render layers separately, reducing the CPU load. However, how well this works depends on the GPU and the browser's ability to utilize it effectively.
+
+### The First Attempt: optimizing for Performance
+
+At first, I tried a few common optimization techniques, such as removing alpha transparency to see if it reduced the painting process. While this did help with performance, it also caused some odd black outlines around my graphics.
+
+I then experimented with scaling and transforming the animation instead of resizing it directly. This helped reduce the reflowing and repainting, and the GPU and CPU usage by 20%, however we were still at an undesirable 70%.
+
+I also tried a skip frame method, however this was never going to work, because the issue was that each cycle was to computationally expensive. Skipping frames only reduced the frequency of overwork but did not improve the actual performance of the cycle.
+
+( And yes I was using requestAnimationFrame ).
+
+### The Solution: Convert to Video for Better Performance
+
+I hit on the idea of converting the animation into a video. The idea was simple: Instead of constantly drawing each frame in real time, I could record the animation as it played and then simply play the recorded video during the animation.
+
+This worked wonders. By switching from a continuous drawing loop to video playback, I reduced the GPU usage by 40%. The animation played much more smoothly, and the CPU usage dropped dramatically from 95% to 45%.
+
+Even better, I used React to seamlessly switch between the animated Canvas and the video, so users wouldn’t even notice the change.
+
+Thats right it essentially draws, records itself then plays back the result once its detected a loop, when it removes the canvas.
+
+### Trying on My M1 Machine: No Issues Here!
+
+Once the solution was in place and working acceptably on my older intel machine, I tested the animation on my M1 MacBook, and it ran flawlessly. There was barely any GPU usage—around 8%—and no dropped frames. The improvement was clear: The M1’s modern architecture was simply better equipped to handle this kind of animation. Essentially my hard won performance improvements were made obsolete by the faster GPU technology of the M1.
+
+### Future Plans: GPU Detection and Variant Animation
+
+After seeing how well the video solution worked on newer machines, I realized there was a clear cutoff for older GPUs. While some users might benefit from a full animation, others with outdated hardware might struggle to handle it.
+
+In the future, I plan to detect the user’s GPU and serve different versions of the animation based on its capabilities. For modern GPUs, I’ll continue with the animated Canvas and video. For older GPUs, I may show a static image or an even simpler variant of the animation.
+
+### Why Not WebGL?
+
+I briefly considered using WebGL and SVG instead of Canvas. WebGL is more optimized for graphics and runs directly on the GPU, its very good for 2D and 3D animations but is a little more complicated. It would likely result in better performance for complex animations. However, I chose Canvas because it’s what got me hooked on programming in the first place. As I was learning I used to make lil things in Canvas,if I was going to have a site then it must use Canvas.
+
+### Why Video Is More Performant Than a Continually Drawing Loop
+
+The reason using a pre-recorded video is more performant than a continual drawing loop comes down to efficiency. When you render an animation frame by frame, the browser has to do a lot of work each time: compute the layout, paint, and composite every single frame. This puts a heavy load on the CPU.
+
+In contrast, when you use a pre-recorded video, the browser simply decodes the video frames and sends them directly to the GPU, which is far more efficient. The browser doesn’t need to re-render the content every time; instead, it just decodes the frame and displays it. This is far less computationally expensive, which is why video often works better, especially on lower-end devices.
+
+### The Paint Composition Process: Layering and Rendering
+
+When we animate on the web, we have to understand the paint composition process. There are several stages involved:
+
+<strong>Layout</strong>: The browser calculates the position and size of all
+elements.
+
+<strong>Painting</strong>: Each element is drawn onto layers, which may involve
+complex color calculations, shadows, and textures.
+
+<strong>Compositing</strong>: After everything is painted, the layers are
+combined into a final image for the screen.
+
+If your animation affects any of these stages too frequently, it can cause repaints and reflows, which are performance killers. To improve performance, we can leverage GPU-accelerated transformations to keep certain layers separate, making it possible for the GPU to handle them independently without taxing the CPU.
+
+### Video Buffering and Decoding
+
+To understand why video performs better than continuously drawing frames, we need to look at video buffering. Video playback works by preloading a series of frames into a buffer—a special area of memory where the video frames are stored temporarily. I had tried to save my loop drawings in memory however I had memory overflow, because it had been to heavy swapping to video which is optimized for this removed the issue.
+
+The video is decoded in chunks, and the GPU can quickly render frames from the buffer. Since the frames are preloaded, the browser doesn’t need to wait for each new frame to be generated. This reduces lag and ensures a smooth playback experience, even on machines with older GPUs.
+
+### Conclusion
+
+In the end, I was able to improve the performance of my animated graphic significantly by moving to a drawing/video solution, optimizing GPU usage, and strategically managing rendering steps. I’ll continue to explore ways to ensure that all users, regardless of their hardware, can enjoy the animation. By detecting the GPU (https://www.npmjs.com/package/detect-gpu) and adjusting the experience accordingly, I’ll be able to create a seamless experience for everyone—whether they’re using a high-end machine or an older laptop.

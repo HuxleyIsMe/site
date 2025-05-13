@@ -4,7 +4,7 @@ export default function MyPage() {
     return (
         <div
             style={{
-                width: `80%`,
+                width: `60%`,
                 transform: 'translateY(100px)',
                 fontFamily:
                     "Consolas, 'Courier New', monospace, 'Segoe UI Emoji'",
