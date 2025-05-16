@@ -1,0 +1,43 @@
+### GPU saves the day
+
+I've recently been diving into the world of graphics and how that's handled in the browser. Today, for some unknown reason, I woke up at 6 am :/ ...
+
+I decided that I wanted to continue learning assembly, as I had been doing for this project: GitHub Project. However, shortly in, my brain said no—it was too technical too early. I found an interesting video by MIT on writing assembly, and the lecturer said something like, "We should understand the underlying hardware and software so we can write more performant code," or something like that. It struck me.
+
+After dabbling with graphics and gaining a high-level understanding of the GPU, I couldn't tell you much more than the fact that the GPU is, yes, its own hardware, and yes, your browser comes with software to push tasks to the GPU. If there's too much for it to handle, it pushes that load to your CPU—hence, we get our fans taking off when trying to run modern graphics, and you'll likely see dropped frames, which look like lag.
+
+Spurred on by the MIT professor and feeling slightly guilty about bailing on my "let's learn assembly at 6 am" vibe (not sure where that came from), I noticed a video all about the GPU!
+
+[Branch video on GPU architecture](https://www.youtube.com/watch?v=h9Z4oGN89MU)
+
+So, urgh, yep—wow. As a TL;DR:
+
+-   A modern GPU can complete over 36 trillion calculations a second.
+
+-   A GPU chip is made up of CUDA, ray tracing, and tensor chips, with memory and other bits too.
+
+-   The majority is CUDA—these perform 'simple' calculations lightning fast, making them very good for bitcoin mining.
+
+-   Tensor chips are used for neural networks and 3D graphics.
+
+-   Ray tracing is for light algorithms in video games.
+
+-   The GPU isn't necessarily better than the CPU—the CPU can multitask, handle other languages easily, and move around quickly. However, the GPU definitely trumps it in cold, hard math, bebe.
+
+It was pretty fascinating, and I couldn't get over the speed and scale of how many calculations this thing could run!
+
+It got me thinking—could we leverage the GPU from our JS code to perform certain calculations?
+
+So, yep, yep—we can. I'm also late to the party.
+
+[GPU.js](https://gpu.rocks/)
+
+This is an open-source package allowing us to leverage the GPU directly from our JS code!
+
+In fact...
+
+[MDN webGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
+
+...has also provided us a way!
+
+I hope to have fun building something with this to compare the performance impact. Stay posted!

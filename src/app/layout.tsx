@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <meta name="debug-check" content="hello from root layout" />
+            </head>
             <body>
                 <main className="page">
                     <SpotifyBar />

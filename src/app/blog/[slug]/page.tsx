@@ -18,7 +18,11 @@ export default async function Page({
 }
 
 export function generateStaticParams() {
-    return [{ slug: 'ESMModules' }, { slug: 'lessons-from-canvas' }]
+    return [
+        { slug: 'ESMModules' },
+        { slug: 'lessons-from-canvas' },
+        { slug: 'gpu-love' },
+    ]
 }
 
 export const dynamicParams = false

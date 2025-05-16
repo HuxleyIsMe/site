@@ -1,12 +1,12 @@
-"use client";
+'use client'
 import {
-  useRef,
-  useEffect,
-  useLayoutEffect,
-  useState,
-  useCallback,
-} from "react";
-import { Canvas } from "./components/canvas";
+    useRef,
+    useEffect,
+    useLayoutEffect,
+    useState,
+    useCallback,
+} from 'react'
+import { Canvas } from './components/canvas'
 
 /**
  *
@@ -25,77 +25,78 @@ import { Canvas } from "./components/canvas";
  *
  */
 export const Graphic: React.FC = () => {
-  const [isReadyToAnimate, setIsReadyToAnimate] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const recorderRef = useRef<MediaRecorder>(null);
+    const [isReadyToAnimate, setIsReadyToAnimate] = useState(false)
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const recorderRef = useRef<MediaRecorder>(null)
 
-  useLayoutEffect(() => {
-    if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
-      setIsReadyToAnimate(true);
-    }
-  }, [isReadyToAnimate]);
+    useLayoutEffect(() => {
+        if (canvasRef.current && videoRef.current && !isReadyToAnimate) {
+            setIsReadyToAnimate(true)
+        }
+    }, [isReadyToAnimate])
 
-  useEffect(() => {
-    if (canvasRef.current && videoRef.current !== null) {
-      const stream = canvasRef.current.captureStream(20);
+    useEffect(() => {
+        if (canvasRef.current && videoRef.current !== null) {
+            const stream = canvasRef.current.captureStream(20)
 
-      const options = { mimeType: "video/webm; codecs=vp9" };
-      const mediaRecorder = new MediaRecorder(stream, options);
+            const options = { mimeType: 'video/webm; codecs=vp9' }
+            const mediaRecorder = new MediaRecorder(stream, options)
 
-      const chunks: BlobPart[] = [];
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunks.push(e.data);
-      };
+            const chunks: BlobPart[] = []
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) chunks.push(e.data)
+            }
 
-      const video = videoRef.current;
+            const video = videoRef.current
 
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(chunks, { type: "video/webm" });
-        const url = URL.createObjectURL(blob);
-        video.src = url;
-        video.play();
-      };
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'video/webm' })
+                const url = URL.createObjectURL(blob)
+                video.src = url
+                video.play()
+            }
 
-      mediaRecorder.start();
+            mediaRecorder.start()
 
-      recorderRef.current = mediaRecorder;
-    }
-  }, [isReadyToAnimate]);
+            recorderRef.current = mediaRecorder
+        }
+    }, [isReadyToAnimate])
 
-  const handleAnimationEnded = useCallback((cb: () => void) => {
-    if (recorderRef.current) {
-      recorderRef.current.stop();
-    }
-    // We want to give the video some time to start playing before
-    // removing the canvas to make it look like a seemless hand over
-    setTimeout(() => {
-      cb();
-    }, 200);
-  }, []);
+    const handleAnimationEnded = useCallback((cb: () => void) => {
+        if (recorderRef.current) {
+            recorderRef.current.stop()
+        }
+        // We want to give the video some time to start playing before
+        // removing the canvas to make it look like a seemless hand over
+        setTimeout(() => {
+            console.log(' I swapped')
+            cb()
+        }, 200)
+    }, [])
 
-  return (
-    <>
-      <video
-        ref={videoRef}
-        aria-description="A video of squiqqly colored circles meandering across the screen"
-        style={{
-          transform: "scale(1.15)",
-          position: "absolute",
-          height: canvasRef.current?.height,
-          width: canvasRef.current?.width,
-          pointerEvents: "none",
-          aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
-        }}
-        autoPlay
-        loop
-        muted
-      />
+    return (
+        <>
+            <video
+                ref={videoRef}
+                aria-description="A video of squiqqly colored circles meandering across the screen"
+                style={{
+                    transform: 'scale(1.15)',
+                    position: 'absolute',
+                    height: canvasRef.current?.height,
+                    width: canvasRef.current?.width,
+                    pointerEvents: 'none',
+                    aspectRatio: `auto ${canvasRef.current?.height} / ${canvasRef.current?.width}`,
+                }}
+                autoPlay
+                loop
+                muted
+            />
 
-      <Canvas
-        canvasRef={canvasRef}
-        handleAnimationCompleted={handleAnimationEnded}
-      />
-    </>
-  );
-};
+            <Canvas
+                canvasRef={canvasRef}
+                handleAnimationCompleted={handleAnimationEnded}
+            />
+        </>
+    )
+}
