@@ -19,7 +19,7 @@ export default async function Page({
 
 export function generateStaticParams() {
     return [
-        { slug: 'ESMModules' },
+        { slug: 'next-emojis' },
         { slug: 'lessons-from-canvas' },
         { slug: 'gpu-love' },
     ]

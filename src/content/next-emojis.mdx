@@ -1,0 +1,91 @@
+## Next.js and the quest for emoji's 🚀 🚀
+
+Wow that was a lot! I ran into some issues when trying to use remark-emoji in next.js and wanted to take a gander. Here is the log of what happened:
+
+[original next.js issue](https://github.com/vercel/next.js/issues/73757)
+
+'''
+Hello 👋
+
+I went on a deep dive with this one in a quest to use emojis from remark-emojis. I ended up just writing a script to do it for me. Would appreciate knowing if I've missed something or followed the wrong thread. 🙂
+
+Having a look, I found three points of failure — one is the known issue of not serializing to a string.
+
+## TLDR:
+
+Next.js cannot work with ES6 packages that contain only 'import' pathways in their 'exports' field of their package.json. This is due to its use of 'require' in two core places.
+
+## Firstly, what do I mean by import of their exports pathway?
+
+Node introduced multiple entry points to modules within the package.json. One reason was to ease the bridge between ES6 modules and CommonJS. We could now specify an entry point to the CommonJS modules as well as to the ES6 modules in one package. To do this, we use the 'exports' field in our package.json to specify which way 'import' should go, which way 'require' should go, and other functionalities or default settings.
+
+[Node.js Package Entry Points](https://nodejs.org/api/packages.html#packages_package_entry_points)
+
+[More about Exports](https://hirok.io/posts/package-json-exports)
+
+With packages like remark-emoji, the exports field only specifies an import pathway:
+
+```
+"exports": {
+  ".": {
+    "import": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+      }
+    }
+  },
+```
+
+If there was a default one level higher, then require would go here. Since there isn't, there is no valid entry point for require, which is correct as this package exclusively uses ES6 modules.
+
+wesbos, this is why you see the addition of default in your example working — because require is flowing that way.
+
+Ok, but why isn't it happening in Next.js? Next.js seems to support ES6.
+
+## Bundling Issue with next.config.ts:
+
+When bundling using next.config.ts (note the .ts), we encounter:
+
+ERR_PACKAGE_PATH_NOT_EXPORTED 🐢
+
+To replicate, simply write:
+
+import emoji from 'remark-emoji'
+
+This error message comes from the resolve-pkg-maps package. This package is a dependency of 'get-tsconfig', which Next.js uses during the configuration process. The error itself arises because the package being imported does not provide a valid entry point for require, which results in the error. To be clear, resolve-pkg-maps works as expected when given the correct conditionals, but somewhere along the flow it is not. The package remark-emoji is also correct, its exports key is valid. Somewhere in the flow however, its being told to use require to retrieve from remark-emoji, leading to the break, as remark-emoji does not posses and exports pathway for require.
+
+Switching to next.config.js avoids this issue as we avoid the above flow, allowing import to work as expected.
+
+## Issue with the MDX Loader:
+
+### Within the plugin options, we can provide one of two values:
+
+The package directly (e.g., import emoji from 'remark-emoji'; then providing emoji). This will break because we encounter the non-serializable issue since the imported plugin is a function.
+
+### Or just include the name as a string (['remark-emoji']).
+
+The problem here is that the MDX loader (next-mdx/mdx-js-loader.js) tries to require the plugin directly, which fails because it attempts to require an ES module without a CommonJS entry point, resulting in:
+
+TypeError: Cannot read properties of null (reading 'in')
+
+This happens here: 🦄
+
+`getOptions` found in packages/next-mdx/mdx-js-loader.js. getOptions uses require to resolve from packages, meaning it simply again can't find a pathway to import the package, resulting in 'null' which leads us to the 'in' of null problem.
+
+### Next Steps
+
+-   I'd love to know what a plugin output should look like.
+
+-   Perhaps debug the next.config.ts issue or add documentation to clarify.
+
+-   Modify the next-mdx/mdx-js-loader to support both import and require.
+
+-   Consider using higher-order components or running scripts pre-build as alternatives.
+
+Would love to try and resolve this! Or if I've got something off, please let me know! 😄 This was fun!
+'''
+
+### Few what a time 🐙 🐱 🐶 😂
+
+So now I simply reminded myself that emojis are chars, therefore I just asked chat to write me a lil script to pass my MDX files and then convert the
+emoji alias to emojis, so now whoop we have emoji's :rocket:
