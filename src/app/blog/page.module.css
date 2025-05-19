@@ -11,6 +11,15 @@
   justify-content: center;
 }
 
+.container > p > a {
+  color: cornflowerblue;
+}
+
+.container > p > a:hover {
+  text-decoration: underline;
+}
+
+
 @media (max-width: 800px) {
   .BlogContainer {
     flex-wrap: wrap;
